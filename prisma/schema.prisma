@@ -16,5 +16,26 @@ model User {
   email    String @unique
   password String
 
+  bankAccounts BankAccount[]
+
   @@map("users")
+}
+
+enum BankAccountType {
+  CHECKING
+  INVESTMENT
+  CASH
+}
+
+model BankAccount {
+  id             String          @id @default(uuid()) @db.Uuid
+  userId         String          @map("user_id") @db.Uuid
+  name           String
+  initialBalance Float           @map("initial_balance")
+  type           BankAccountType
+  color          String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("bank_accounts")
 }
