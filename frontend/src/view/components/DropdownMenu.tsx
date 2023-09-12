@@ -9,9 +9,9 @@ function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
   )
 }
 
-function DropdownMenuTrigger({ children }: { children: React.ReactNode }) {
+function DropdownMenuTrigger({ children, asChild }: { children: React.ReactNode, asChild?: boolean }) {
   return (
-    <RdxDropdownMenu.Trigger className="outline-none">
+    <RdxDropdownMenu.Trigger className="outline-none" asChild={asChild}>
       {children}
     </RdxDropdownMenu.Trigger>
   )
@@ -27,7 +27,7 @@ function DropdownMenuContent({ children, className }: DropdownMenuContentProps) 
     <RdxDropdownMenu.Portal>
       <RdxDropdownMenu.Content
         className={cn(
-          'rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-50',
+          'rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[99]',
           'data-[side=bottom]:animate-slide-up-and-fade',
           'data-[side=top]:animate-slide-down-and-fade',
           className

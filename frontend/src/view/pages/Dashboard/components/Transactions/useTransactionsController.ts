@@ -6,7 +6,7 @@ export function useTransactionsController() {
 
   const transactions = []
 
-  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(true)
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
 
   function handleOpenFiltersModal() {
     setIsFiltersModalOpen(true)
