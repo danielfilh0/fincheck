@@ -1,3 +1,4 @@
+import { Button } from "../../../../components/Button";
 import { ColorsDropdownInput } from "../../../../components/ColorsDropdownInput";
 import { DatePickerInput } from "../../../../components/DatePickerInput";
 import { Input } from "../../../../components/Input";
@@ -76,6 +77,8 @@ export function NewTransactionModal() {
           />
 
           <DatePickerInput />
+
+          <Button>Criar</Button>
         </div>
       </form>
     </Modal>
