@@ -6,6 +6,8 @@ import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
 import { Select } from "../../../../components/Select";
 import { useEditAccountModalController } from "./useEditAccountModalController";
+import { TrashIcon } from "../../../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal";
 
 export function EditAccountModal() {
   const {
@@ -15,18 +17,42 @@ export function EditAccountModal() {
     handleSubmit,
     register,
     control,
-    isLoading
-  } = useEditAccountModalController()
+    isLoading,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount,
+    isLoadingDelete
+  } = useEditAccountModalController();
+
+  if (isDeleteModalOpen)
+    return (
+      <ConfirmDeleteModal
+        title="Tem certeza que deseja excluir esta conta?"
+        description="Ao excluir a conta, também serão excluídos todos os registros de
+        receitas e despesas relacionados."
+        isLoading={isLoadingDelete}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleDeleteAccount}
+      />
+    );
 
   return (
     <Modal
       title="Editar Conta"
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
+      rightAction={
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className="w-6 h-6 text-red-900" />
+        </button>
+      }
     >
       <form onSubmit={handleSubmit}>
         <div>
-          <span className="text-gray-600 tracking-[-0.5px] text-xs">Saldo inicial</span>
+          <span className="text-gray-600 tracking-[-0.5px] text-xs">
+            Saldo inicial
+          </span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg">R$</span>
 
@@ -51,7 +77,7 @@ export function EditAccountModal() {
             type="text"
             placeholder="Nome da Conta"
             error={errors.name?.message}
-            {...register('name')}
+            {...register("name")}
           />
 
           <Controller
@@ -66,16 +92,16 @@ export function EditAccountModal() {
                 value={value}
                 options={[
                   {
-                    label: 'Conta Corrente',
-                    value: 'CHECKING'
+                    label: "Conta Corrente",
+                    value: "CHECKING",
                   },
                   {
-                    label: 'Investimentos',
-                    value: 'INVESTMENT'
+                    label: "Investimentos",
+                    value: "INVESTMENT",
                   },
                   {
-                    label: 'Dinheiro Físico',
-                    value: 'CASH'
+                    label: "Dinheiro Físico",
+                    value: "CASH",
                   },
                 ]}
               />
@@ -95,9 +121,11 @@ export function EditAccountModal() {
             )}
           />
 
-          <Button type="submit" className="w-full mt-6" isLoading={isLoading}>Salvar</Button>
+          <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
+            Salvar
+          </Button>
         </div>
       </form>
     </Modal>
-  )
+  );
 }

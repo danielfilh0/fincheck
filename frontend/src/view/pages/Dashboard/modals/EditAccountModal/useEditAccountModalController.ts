@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { bankAccountsService } from "../../../../../app/services/bankAccounts";
 import toast from "react-hot-toast";
 import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
+import { useState } from "react";
 
 const schema = z.object({
   initialBalance: z.union([
@@ -41,12 +42,15 @@ export function useEditAccountModalController() {
     }
   });
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
   const queryClient = useQueryClient()
-  const { isLoading, mutateAsync } = useMutation(bankAccountsService.update)
+  const { isLoading, mutateAsync: updateAccount, } = useMutation(bankAccountsService.update)
+  const { isLoading: isLoadingDelete, mutateAsync: removeAccount, } = useMutation(bankAccountsService.remove)
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await mutateAsync({
+      await updateAccount({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
         id: accountBeingEdited!.id
@@ -60,6 +64,26 @@ export function useEditAccountModalController() {
     }
   })
 
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true)
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false)
+  }
+
+  async function handleDeleteAccount() {
+    try {
+      await removeAccount(accountBeingEdited!.id)
+
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
+      toast.success('Conta deletada com sucesso!')
+      closeEditAccountModal()
+    } catch {
+      toast.error('Erro ao deletar conta!')
+    }
+  }
+
   return {
     isEditAccountModalOpen,
     closeEditAccountModal,
@@ -67,6 +91,11 @@ export function useEditAccountModalController() {
     control,
     errors,
     handleSubmit,
-    isLoading
+    isLoading,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount,
+    isLoadingDelete
   }
 }
