@@ -8,10 +8,22 @@ import { DatePicker } from "./DatePicker";
 interface DatePickerInputProps {
   error?: string;
   className?: string;
+  value?: Date;
+  onChange?: (date: Date) => void;
 }
 
-export function DatePickerInput({ error, className }: DatePickerInputProps) {
-  const [selectedDate, setSelectedDate] = useState(new Date())
+export function DatePickerInput({
+  error,
+  className,
+  value,
+  onChange,
+}: DatePickerInputProps) {
+  const [selectedDate, setSelectedDate] = useState(value ?? new Date());
+
+  function handleChangeDate(date: Date) {
+    setSelectedDate(date);
+    onChange?.(date);
+  }
 
   return (
     <div>
@@ -25,22 +37,27 @@ export function DatePickerInput({ error, className }: DatePickerInputProps) {
               className
             )}
           >
-            <span className="absolute text-gray-700 text-xs left-[13px] top-2 pointer-events-none">Data</span>
+            <span className="absolute text-gray-700 text-xs left-[13px] top-2 pointer-events-none">
+              Data
+            </span>
             <span>{formatDate(selectedDate)}</span>
           </button>
         </Popover.Trigger>
 
         <Popover.Content>
-          <DatePicker value={selectedDate} onChange={date => setSelectedDate(date)} />
+          <DatePicker
+            value={selectedDate}
+            onChange={handleChangeDate}
+          />
         </Popover.Content>
 
-          {error && (
-            <div className="mt-2 flex gap-2 items-center text-red-900">
-              <CrossCircledIcon />
-              <span className="text-xs">{error}</span>
-            </div>
-          )}
+        {error && (
+          <div className="mt-2 flex gap-2 items-center text-red-900">
+            <CrossCircledIcon />
+            <span className="text-xs">{error}</span>
+          </div>
+        )}
       </Popover.Root>
     </div>
-  )
+  );
 }
