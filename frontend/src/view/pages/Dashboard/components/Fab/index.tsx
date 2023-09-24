@@ -1,8 +1,8 @@
-import { PlusIcon } from "@radix-ui/react-icons";
-import { DropdownMenu } from "../../../../components/DropdownMenu";
-import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
-import { BankAccountIcon } from "../../../../components/icons/BankAccountIcon";
-import { useDashboard } from "../DashboardContext/useDashboard";
+import { PlusIcon } from '@radix-ui/react-icons'
+import { DropdownMenu } from '../../../../components/DropdownMenu'
+import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon'
+import { BankAccountIcon } from '../../../../components/icons/BankAccountIcon'
+import { useDashboard } from '../DashboardContext/useDashboard'
 
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard()
@@ -34,5 +34,5 @@ export function Fab() {
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </div>
-    )
+  )
 }

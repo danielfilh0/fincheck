@@ -8,5 +8,5 @@ export function Fun() {
       <path d="M22 31V19.6127" stroke="#845EF7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

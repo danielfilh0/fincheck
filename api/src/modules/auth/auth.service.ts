@@ -2,12 +2,12 @@ import {
   ConflictException,
   Injectable,
   UnauthorizedException,
-} from '@nestjs/common';
-import { UsersRepository } from 'src/shared/database/repositories/users.repository';
-import { SigninDto } from './dto/signin-dto';
-import { compare, hash } from 'bcryptjs';
-import { JwtService } from '@nestjs/jwt';
-import { SignupDto } from './dto/signup-dto';
+} from '@nestjs/common'
+import { UsersRepository } from 'src/shared/database/repositories/users.repository'
+import { SigninDto } from './dto/signin-dto'
+import { compare, hash } from 'bcryptjs'
+import { JwtService } from '@nestjs/jwt'
+import { SignupDto } from './dto/signup-dto'
 
 @Injectable()
 export class AuthService {
@@ -17,40 +17,40 @@ export class AuthService {
   ) {}
 
   async signin(signinDto: SigninDto) {
-    const { email, password } = signinDto;
+    const { email, password } = signinDto
 
     const user = await this.usersRepo.findUnique({
       where: { email },
-    });
+    })
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials.');
+      throw new UnauthorizedException('Invalid credentials.')
     }
 
-    const isPasswordValid = await compare(password, user.password);
+    const isPasswordValid = await compare(password, user.password)
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials.');
+      throw new UnauthorizedException('Invalid credentials.')
     }
 
-    const acessToken = await this.generateAcessToken(user.id);
+    const acessToken = await this.generateAcessToken(user.id)
 
-    return { acessToken };
+    return { acessToken }
   }
 
   async signup(signupDto: SignupDto) {
-    const { name, email, password } = signupDto;
+    const { name, email, password } = signupDto
 
     const emailTaken = await this.usersRepo.findUnique({
       where: { email },
       select: { id: true },
-    });
+    })
 
     if (emailTaken) {
-      throw new ConflictException('This email is already in use.');
+      throw new ConflictException('This email is already in use.')
     }
 
-    const hashedPassword = await hash(password, 12);
+    const hashedPassword = await hash(password, 12)
 
     const user = await this.usersRepo.create({
       data: {
@@ -76,14 +76,14 @@ export class AuthService {
           },
         },
       },
-    });
+    })
 
-    const acessToken = await this.generateAcessToken(user.id);
+    const acessToken = await this.generateAcessToken(user.id)
 
-    return { acessToken };
+    return { acessToken }
   }
 
   private generateAcessToken(userId: string) {
-    return this.jwtService.signAsync({ sub: userId });
+    return this.jwtService.signAsync({ sub: userId })
   }
 }

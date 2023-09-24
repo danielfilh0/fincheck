@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useBankAccounts } from "../../../../../../app/hooks/useBankAccounts";
+import { useState } from 'react'
+import { useBankAccounts } from '../../../../../../app/hooks/useBankAccounts'
 
 export function useFiltersModalController() {
   const [selectedBankAccountId, setSelectedBankAccountId] = useState<undefined | string>(undefined)

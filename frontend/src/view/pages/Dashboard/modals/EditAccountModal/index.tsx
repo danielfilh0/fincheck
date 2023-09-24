@@ -1,13 +1,13 @@
-import { Controller } from "react-hook-form";
-import { Button } from "../../../../components/Button";
-import { ColorsDropdownInput } from "../../../../components/ColorsDropdownInput";
-import { Input } from "../../../../components/Input";
-import { InputCurrency } from "../../../../components/InputCurrency";
-import { Modal } from "../../../../components/Modal";
-import { Select } from "../../../../components/Select";
-import { useEditAccountModalController } from "./useEditAccountModalController";
-import { TrashIcon } from "../../../../components/icons/TrashIcon";
-import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal";
+import { Controller } from 'react-hook-form'
+import { Button } from '../../../../components/Button'
+import { ColorsDropdownInput } from '../../../../components/ColorsDropdownInput'
+import { Input } from '../../../../components/Input'
+import { InputCurrency } from '../../../../components/InputCurrency'
+import { Modal } from '../../../../components/Modal'
+import { Select } from '../../../../components/Select'
+import { useEditAccountModalController } from './useEditAccountModalController'
+import { TrashIcon } from '../../../../components/icons/TrashIcon'
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal'
 
 export function EditAccountModal() {
   const {
@@ -23,7 +23,7 @@ export function EditAccountModal() {
     handleCloseDeleteModal,
     handleDeleteAccount,
     isLoadingDelete
-  } = useEditAccountModalController();
+  } = useEditAccountModalController()
 
   if (isDeleteModalOpen)
     return (
@@ -35,7 +35,7 @@ export function EditAccountModal() {
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteAccount}
       />
-    );
+    )
 
   return (
     <Modal
@@ -77,7 +77,7 @@ export function EditAccountModal() {
             type="text"
             placeholder="Nome da Conta"
             error={errors.name?.message}
-            {...register("name")}
+            {...register('name')}
           />
 
           <Controller
@@ -92,16 +92,16 @@ export function EditAccountModal() {
                 value={value}
                 options={[
                   {
-                    label: "Conta Corrente",
-                    value: "CHECKING",
+                    label: 'Conta Corrente',
+                    value: 'CHECKING',
                   },
                   {
-                    label: "Investimentos",
-                    value: "INVESTMENT",
+                    label: 'Investimentos',
+                    value: 'INVESTMENT',
                   },
                   {
-                    label: "Dinheiro Físico",
-                    value: "CASH",
+                    label: 'Dinheiro Físico',
+                    value: 'CASH',
                   },
                 ]}
               />
@@ -127,5 +127,5 @@ export function EditAccountModal() {
         </div>
       </form>
     </Modal>
-  );
+  )
 }

@@ -1,34 +1,34 @@
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
-import { useCategories } from "../../../../../app/hooks/useCategories";
-import { useMemo, useState } from "react";
-import { Transaction } from "../../../../../app/entities/Transaction";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { transactionsService } from "../../../../../app/services/transactionsService";
-import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
-import { toast } from "react-hot-toast";
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts'
+import { useCategories } from '../../../../../app/hooks/useCategories'
+import { useMemo, useState } from 'react'
+import { Transaction } from '../../../../../app/entities/Transaction'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { transactionsService } from '../../../../../app/services/transactionsService'
+import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber'
+import { toast } from 'react-hot-toast'
 
 const schema = z.object({
   value: z.
-    union([z.string().nonempty("Informe o valor"), z.number()])
+    union([z.string().nonempty('Informe o valor'), z.number()])
     .transform((val, ctx) => {
       if (val === 0 || val === '0' || val === '0,00') {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "A transação precisa ter um valor",
-        });
-        return z.NEVER;
+          message: 'A transação precisa ter um valor',
+        })
+        return z.NEVER
       }
 
       return val
-  }),
-  name: z.string().nonempty("Informe o nome"),
-  categoryId: z.string().nonempty("Informe a categoria"),
-  bankAccountId: z.string().nonempty("Informe a conta"),
+    }),
+  name: z.string().nonempty('Informe o nome'),
+  categoryId: z.string().nonempty('Informe a categoria'),
+  bankAccountId: z.string().nonempty('Informe a conta'),
   date: z.date(),
-});
+})
 
 type FormData = z.infer<typeof schema>;
 
@@ -50,18 +50,18 @@ export function useEditTransactionModalController(
       categoryId: transaction?.categoryId,
       date: transaction ? new Date(transaction.date) : new Date(),
     },
-  });
+  })
 
-  const { accounts } = useBankAccounts();
-  const { categories: categoriesList } = useCategories();
-  const queryClient = useQueryClient();
+  const { accounts } = useBankAccounts()
+  const { categories: categoriesList } = useCategories()
+  const queryClient = useQueryClient()
   const { isLoading, mutateAsync: updateTransaction } = useMutation(
     transactionsService.update
-  );
+  )
   const { isLoading: isLoadingDelete, mutateAsync: removeTransaction } =
-    useMutation(transactionsService.remove);
+    useMutation(transactionsService.remove)
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   async function handleDeleteTransaction() {
     try {
@@ -77,11 +77,11 @@ export function useEditTransactionModalController(
   }
 
   function handleOpenDeleteModal() {
-    setIsDeleteModalOpen(true);
+    setIsDeleteModalOpen(true)
   }
 
   function handleCloseDeleteModal() {
-    setIsDeleteModalOpen(false);
+    setIsDeleteModalOpen(false)
   }
 
   const handleSubmit = hookFormSubmit(async (data) => {
@@ -92,31 +92,31 @@ export function useEditTransactionModalController(
         type: transaction!.type,
         value: currencyStringToNumber(data.value),
         date: data.date.toISOString(),
-      });
+      })
 
-      queryClient.invalidateQueries({ queryKey: ["transactions"] })
+      queryClient.invalidateQueries({ queryKey: ['transactions'] })
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
 
       toast.success(
-        transaction!.type === "EXPENSE"
-          ? "Despesa editada com sucesso!"
-          : "Receita editada com sucesso!"
-      );
-      onClose();
+        transaction!.type === 'EXPENSE'
+          ? 'Despesa editada com sucesso!'
+          : 'Receita editada com sucesso!'
+      )
+      onClose()
     } catch {
       toast.success(
-        transaction!.type === "EXPENSE"
-          ? "Erro ao editar despesa!"
-          : "Erro ao editar receita!"
-      );
+        transaction!.type === 'EXPENSE'
+          ? 'Erro ao editar despesa!'
+          : 'Erro ao editar receita!'
+      )
     }
-  });
+  })
 
   const categories = useMemo(
     () =>
       categoriesList.filter((category) => category.type === transaction?.type),
     [categoriesList, transaction]
-  );
+  )
 
   return {
     register,
@@ -131,5 +131,5 @@ export function useEditTransactionModalController(
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDeleteTransaction,
-  };
+  }
 }

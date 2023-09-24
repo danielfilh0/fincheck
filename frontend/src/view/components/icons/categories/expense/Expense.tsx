@@ -9,5 +9,5 @@ export function Expense() {
       <path d="M28.5889 23.5V28.3477" stroke="#C92A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

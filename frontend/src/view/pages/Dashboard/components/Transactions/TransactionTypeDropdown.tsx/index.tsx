@@ -1,8 +1,8 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { TransactionsIcon } from "../../../../../components/icons/TransactionsIcon";
-import { DropdownMenu } from "../../../../../components/DropdownMenu";
-import { IncomeIcon } from "../../../../../components/icons/IncomeIcon";
-import { ExpensesIcon } from "../../../../../components/icons/ExpensesIcon";
+import { ChevronDownIcon } from '@radix-ui/react-icons'
+import { TransactionsIcon } from '../../../../../components/icons/TransactionsIcon'
+import { DropdownMenu } from '../../../../../components/DropdownMenu'
+import { IncomeIcon } from '../../../../../components/icons/IncomeIcon'
+import { ExpensesIcon } from '../../../../../components/icons/ExpensesIcon'
 
 interface TransactionTypeDropdownProps {
   onSelect(type: 'INCOME' | 'EXPENSE' | undefined): void
@@ -43,5 +43,5 @@ export function TransactionTypeDropdown({ onSelect, selectedType }: TransactionT
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  );
+  )
 }

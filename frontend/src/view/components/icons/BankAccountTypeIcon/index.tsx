@@ -1,4 +1,4 @@
-import { iconsMap } from "./iconsMap"
+import { iconsMap } from './iconsMap'
 
 interface BankAccountTypeIconProps {
   type: keyof typeof iconsMap

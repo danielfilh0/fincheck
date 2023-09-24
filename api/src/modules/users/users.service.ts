@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { UsersRepository } from 'src/shared/database/repositories/users.repository';
+import { Injectable } from '@nestjs/common'
+import { UsersRepository } from 'src/shared/database/repositories/users.repository'
 
 @Injectable()
 export class UsersService {
@@ -12,6 +12,6 @@ export class UsersService {
         name: true,
         email: true,
       },
-    });
+    })
   }
 }

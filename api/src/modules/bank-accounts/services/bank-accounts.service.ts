@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBankAccountDto } from '../dto/create-bank-account.dto';
-import { UpdateBankAccountDto } from '../dto/update-bank-account.dto';
-import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repository';
-import { ValidateBankAccountOwnershipService } from './validate-bank-account-ownership.service';
+import { Injectable } from '@nestjs/common'
+import { CreateBankAccountDto } from '../dto/create-bank-account.dto'
+import { UpdateBankAccountDto } from '../dto/update-bank-account.dto'
+import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repository'
+import { ValidateBankAccountOwnershipService } from './validate-bank-account-ownership.service'
 
 @Injectable()
 export class BankAccountsService {
@@ -11,7 +11,7 @@ export class BankAccountsService {
     private readonly validateBankAccountOwnershipService: ValidateBankAccountOwnershipService,
   ) {}
   create(userId: string, createBankAccountDto: CreateBankAccountDto) {
-    const { color, initialBalance, name, type } = createBankAccountDto;
+    const { color, initialBalance, name, type } = createBankAccountDto
 
     return this.bankAccountsRepo.create({
       data: {
@@ -21,7 +21,7 @@ export class BankAccountsService {
         name,
         type,
       },
-    });
+    })
   }
 
   async findAllByUserId(userId: string) {
@@ -35,7 +35,7 @@ export class BankAccountsService {
           },
         },
       },
-    });
+    })
 
     return bankAccounts.map(({ transactions, ...bankAccount }) => {
       const totalTransactions = transactions.reduce(
@@ -45,15 +45,15 @@ export class BankAccountsService {
             ? transaction.value
             : -transaction.value),
         0,
-      );
+      )
 
-      const currentBalance = bankAccount.initialBalance + totalTransactions;
+      const currentBalance = bankAccount.initialBalance + totalTransactions
 
       return {
         ...bankAccount,
         currentBalance,
-      };
-    });
+      }
+    })
   }
 
   async update(
@@ -64,9 +64,9 @@ export class BankAccountsService {
     await this.validateBankAccountOwnershipService.validate(
       userId,
       bankAccountId,
-    );
+    )
 
-    const { color, initialBalance, name, type } = updateBankAccountDto;
+    const { color, initialBalance, name, type } = updateBankAccountDto
 
     return this.bankAccountsRepo.update({
       where: { id: bankAccountId },
@@ -76,19 +76,19 @@ export class BankAccountsService {
         name,
         type,
       },
-    });
+    })
   }
 
   async remove(userId: string, bankAccountId: string) {
     await this.validateBankAccountOwnershipService.validate(
       userId,
       bankAccountId,
-    );
+    )
 
     await this.bankAccountsRepo.delete({
       where: { id: bankAccountId },
-    });
+    })
 
-    return null;
+    return null
   }
 }

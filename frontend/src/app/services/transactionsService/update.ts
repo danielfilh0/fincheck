@@ -1,4 +1,4 @@
-import { httpClient } from "../httpClient";
+import { httpClient } from '../httpClient'
 
 export interface UpdateTransactionParams {
   id: string;
@@ -6,12 +6,12 @@ export interface UpdateTransactionParams {
   categoryId: string;
   name: string;
   value: number;
-  type: "INCOME" | "EXPENSE";
+  type: 'INCOME' | 'EXPENSE';
   date: string;
 }
 
 export async function update({ id, ...params }: UpdateTransactionParams) {
-  const { data } = await httpClient.put(`/transactions/${id}`, params);
+  const { data } = await httpClient.put(`/transactions/${id}`, params)
 
-  return data;
+  return data
 }

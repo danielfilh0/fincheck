@@ -7,5 +7,5 @@ export function Food() {
       <path d="M18.7676 16.9161L18.7773 13.4513" stroke="#FF6B6B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

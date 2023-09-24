@@ -1,5 +1,5 @@
-import { Category } from "../../entities/Category"
-import { httpClient } from "../httpClient"
+import { Category } from '../../entities/Category'
+import { httpClient } from '../httpClient'
 
 type CategoriesResponse = Array<Category>
 

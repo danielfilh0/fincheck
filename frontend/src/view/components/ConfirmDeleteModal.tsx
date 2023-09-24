@@ -1,6 +1,6 @@
-import { Button } from "./Button";
-import { Modal } from "./Modal";
-import { TrashIcon } from "./icons/TrashIcon";
+import { Button } from './Button'
+import { Modal } from './Modal'
+import { TrashIcon } from './icons/TrashIcon'
 
 interface ConfirmDeleteModalProps {
   onConfirm(): void;
@@ -52,5 +52,5 @@ export function ConfirmDeleteModal({
         </Button>
       </div>
     </Modal>
-  );
+  )
 }

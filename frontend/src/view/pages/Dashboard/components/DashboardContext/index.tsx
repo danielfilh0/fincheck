@@ -1,5 +1,5 @@
-import { createContext, useCallback, useState } from "react";
-import { BankAccount } from "../../../../../app/entities/BankAccount";
+import { createContext, useCallback, useState } from 'react'
+import { BankAccount } from '../../../../../app/entities/BankAccount'
 
 interface DashboardContextValue {
   areValuesVisible: boolean

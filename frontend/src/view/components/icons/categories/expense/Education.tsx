@@ -6,5 +6,5 @@ export function Education() {
       <path d="M13.4512 26.4949V22.4172C13.4512 21.5405 14.0895 20.7942 14.9564 20.658L18.7082 20.0703" stroke="#CC5DE8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

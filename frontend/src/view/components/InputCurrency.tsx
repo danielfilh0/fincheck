@@ -1,5 +1,5 @@
-import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/cn";
+import { CrossCircledIcon } from '@radix-ui/react-icons'
+import { cn } from '../../app/utils/cn'
 import CurrencyInput from 'react-currency-input-field'
 
 interface InputCurrencyProps {
@@ -53,4 +53,4 @@ InputCurrency.defaultProps = {
   error: '',
   className: '',
   onChange: null,
-};
+}

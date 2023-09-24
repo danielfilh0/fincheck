@@ -1,5 +1,5 @@
-import { BankAccount } from "../../entities/BankAccount"
-import { httpClient } from "../httpClient"
+import { BankAccount } from '../../entities/BankAccount'
+import { httpClient } from '../httpClient'
 
 type BankAccountsResponse = Array<BankAccount>
 

@@ -1,34 +1,34 @@
-import { z } from "zod";
-import { useDashboard } from "../../components/DashboardContext/useDashboard";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
-import { useCategories } from "../../../../../app/hooks/useCategories";
-import { useMemo } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { transactionsService } from "../../../../../app/services/transactionsService";
-import { toast } from "react-hot-toast";
-import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
+import { z } from 'zod'
+import { useDashboard } from '../../components/DashboardContext/useDashboard'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts'
+import { useCategories } from '../../../../../app/hooks/useCategories'
+import { useMemo } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { transactionsService } from '../../../../../app/services/transactionsService'
+import { toast } from 'react-hot-toast'
+import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber'
 
 const schema = z.object({
   value: z.
-    union([z.string().nonempty("Informe o valor"), z.number()])
+    union([z.string().nonempty('Informe o valor'), z.number()])
     .transform((val, ctx) => {
       if (val === 0 || val === '0' || val === '0,00') {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "A transação precisa ter um valor",
-        });
-        return z.NEVER;
+          message: 'A transação precisa ter um valor',
+        })
+        return z.NEVER
       }
 
       return val
-  }),
-  name: z.string().nonempty("Informe o nome"),
-  categoryId: z.string().nonempty("Informe a categoria"),
-  bankAccountId: z.string().nonempty("Informe a conta"),
+    }),
+  name: z.string().nonempty('Informe o nome'),
+  categoryId: z.string().nonempty('Informe a categoria'),
+  bankAccountId: z.string().nonempty('Informe a conta'),
   date: z.date(),
-});
+})
 
 type FormData = z.infer<typeof schema>;
 
@@ -37,7 +37,7 @@ export function useNewTransactionModalController() {
     isNewTransactionModalOpen,
     closeNewTransactionModal,
     newTransactionType,
-  } = useDashboard();
+  } = useDashboard()
 
   const {
     register,
@@ -51,7 +51,7 @@ export function useNewTransactionModalController() {
       value: '0',
       date: new Date()
     }
-  });
+  })
 
   const queryClient = useQueryClient()
   const { accounts } = useBankAccounts()
@@ -104,5 +104,5 @@ export function useNewTransactionModalController() {
     accounts,
     categories,
     isLoading
-  };
+  }
 }

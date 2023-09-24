@@ -1,8 +1,8 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Modal } from "../../../../../components/Modal";
-import { Button } from "../../../../../components/Button";
-import { useFiltersModalController } from "./useFiltersModalController";
-import { cn } from "../../../../../../app/utils/cn";
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
+import { Modal } from '../../../../../components/Modal'
+import { Button } from '../../../../../components/Button'
+import { useFiltersModalController } from './useFiltersModalController'
+import { cn } from '../../../../../../app/utils/cn'
 
 interface FiltersModalProps {
   open: boolean;
@@ -21,7 +21,7 @@ export function FiltersModal({
     selectedYear,
     handleChangeYear,
     accounts,
-  } = useFiltersModalController();
+  } = useFiltersModalController()
 
   return (
     <Modal open={open} onClose={onClose} title="Filtros">
@@ -36,8 +36,8 @@ export function FiltersModal({
               key={account.id}
               onClick={() => handleSelectBankAccount(account.id)}
               className={cn(
-                "p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors",
-                account.id === selectedBankAccountId && "!bg-gray-200"
+                'p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors',
+                account.id === selectedBankAccountId && '!bg-gray-200'
               )}
             >
               {account.name}
@@ -84,5 +84,5 @@ export function FiltersModal({
         Aplicar filtros
       </Button>
     </Modal>
-  );
+  )
 }

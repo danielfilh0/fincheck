@@ -1,12 +1,12 @@
-import * as RdxSelect from "@radix-ui/react-select";
+import * as RdxSelect from '@radix-ui/react-select'
 import {
   ChevronDownIcon,
   ChevronUpIcon,
   CrossCircledIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons'
 
-import { cn } from "../../app/utils/cn";
-import { useState } from "react";
+import { cn } from '../../app/utils/cn'
+import { useState } from 'react'
 
 interface SelectProps {
   className?: string;
@@ -28,10 +28,10 @@ export function Select({
   value,
   onChange
 }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState(value ?? '');
+  const [selectedValue, setSelectedValue] = useState(value ?? '')
 
   function handleSelect(value: string) {
-    setSelectedValue(value);
+    setSelectedValue(value)
     onChange?.(value)
   }
 
@@ -40,9 +40,9 @@ export function Select({
       <div className="relative">
         <label
           className={cn(
-            "absolute z-10 top-1/2 -translate-y-1/2 left-3 text-gray-700 pointer-events-none",
+            'absolute z-10 top-1/2 -translate-y-1/2 left-3 text-gray-700 pointer-events-none',
             selectedValue &&
-              "text-xs left-[13px] top-2 transition-all translate-y-0"
+              'text-xs left-[13px] top-2 transition-all translate-y-0'
           )}
         >
           {placeholder}
@@ -54,8 +54,8 @@ export function Select({
         >
           <RdxSelect.Trigger
             className={cn(
-              "bg-white rounded-lg w-full border border-gray-500 px-3 h-[52px] text-gray-800 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative pt-4",
-              error && "!border-red-900",
+              'bg-white rounded-lg w-full border border-gray-500 px-3 h-[52px] text-gray-800 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative pt-4',
+              error && '!border-red-900',
               className
             )}
           >
@@ -98,5 +98,5 @@ export function Select({
         </div>
       )}
     </div>
-  );
+  )
 }

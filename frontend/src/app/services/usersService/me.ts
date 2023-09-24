@@ -1,5 +1,5 @@
-import { User } from "../../entities/User"
-import { httpClient } from "../httpClient"
+import { User } from '../../entities/User'
+import { httpClient } from '../httpClient'
 
 type MeResponse = User
 

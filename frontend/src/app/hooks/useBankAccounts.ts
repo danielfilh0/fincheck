@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { bankAccountsService } from "../services/bankAccounts";
+import { bankAccountsService } from '../services/bankAccounts'
 
 export function useBankAccounts() {
   const { data, isFetching } = useQuery({

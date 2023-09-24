@@ -9,5 +9,5 @@ export function Income() {
       <path fillRule="evenodd" clipRule="evenodd" d="M19.8027 21.5803C19.8027 20.3671 20.7863 19.3844 21.9987 19.3844C23.212 19.3844 24.1956 20.3671 24.1956 21.5803C24.1956 22.7937 23.212 23.7763 21.9987 23.7763C20.7863 23.7763 19.8027 22.7937 19.8027 21.5803Z" stroke="#2B8A3E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

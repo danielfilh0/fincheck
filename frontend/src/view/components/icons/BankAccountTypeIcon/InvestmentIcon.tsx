@@ -12,6 +12,6 @@ export function InvestmentIcon() {
       <path fillRule="evenodd" clipRule="evenodd" d="M29.2147 21.1546H27.7445C26.958 21.1546 26.3201 20.519 26.3201 19.7346V16.8135C26.3201 16.0291 26.958 15.3945 27.7445 15.3945H29.2147C30.0021 15.3945 30.64 16.0291 30.64 16.8135V19.7346C30.64 20.519 30.0021 21.1546 29.2147 21.1546Z" stroke="#495057" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M28.48 15.3941V12.9941" stroke="#495057" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
-  </svg>
+    </svg>
   )
 }

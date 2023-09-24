@@ -1,5 +1,5 @@
-import { useSwiper } from "swiper/react";
-import { cn } from "../../../../../../app/utils/cn";
+import { useSwiper } from 'swiper/react'
+import { cn } from '../../../../../../app/utils/cn'
 
 interface SliderOptionProps {
   index: number
@@ -17,8 +17,8 @@ export function SliderOption({ index, isActive, month }: SliderOptionProps) {
         isActive && 'bg-white'
       )}
       onClick={() => swiper.slideTo(index)}
-  >
-    {month}
-  </button>
+    >
+      {month}
+    </button>
   )
 }

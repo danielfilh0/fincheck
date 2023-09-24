@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repository';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repository'
 
 @Injectable()
 export class ValidateBankAccountOwnershipService {
@@ -8,8 +8,8 @@ export class ValidateBankAccountOwnershipService {
   async validate(userId: string, bankAccountId: string) {
     const isOwner = await this.bankAccountsRepo.findFirst({
       where: { userId, id: bankAccountId },
-    });
+    })
 
-    if (!isOwner) throw new NotFoundException('Bank account not found.');
+    if (!isOwner) throw new NotFoundException('Bank account not found.')
   }
 }

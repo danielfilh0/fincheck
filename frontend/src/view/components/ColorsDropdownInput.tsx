@@ -1,8 +1,8 @@
-import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/cn";
-import { DropdownMenu } from "./DropdownMenu";
-import { ColorIcon } from "./icons/ColorIcon";
-import { useState } from "react";
+import { ChevronDownIcon, CrossCircledIcon } from '@radix-ui/react-icons'
+import { cn } from '../../app/utils/cn'
+import { DropdownMenu } from './DropdownMenu'
+import { ColorIcon } from './icons/ColorIcon'
+import { useState } from 'react'
 
 interface ColorsDropdownInputProps {
   error?: string;
@@ -31,7 +31,7 @@ const colors: Color[] = [
   { color: '#82C91E', bg: '#F4FCE3' },
   { color: '#FAB005', bg: '#FFF9DB' },
   { color: '#FD7E14', bg: '#FFF4E6' },
-];
+]
 
 export function ColorsDropdownInput({
   className,
@@ -56,8 +56,8 @@ export function ColorsDropdownInput({
         <DropdownMenu.Trigger asChild>
           <button
             className={cn(
-              "bg-white rounded-lg w-full border border-gray-500 px-3 h-[52px] text-gray-700 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative",
-              error && "!border-red-900",
+              'bg-white rounded-lg w-full border border-gray-500 px-3 h-[52px] text-gray-700 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative',
+              error && '!border-red-900',
               className
             )}
           >
@@ -74,9 +74,9 @@ export function ColorsDropdownInput({
           </button>
         </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content
-        className="grid grid-cols-4"
-      >
+        <DropdownMenu.Content
+          className="grid grid-cols-4"
+        >
           {colors.map(color => (
             <DropdownMenu.Item
               key={color.color}
@@ -85,7 +85,7 @@ export function ColorsDropdownInput({
               <ColorIcon color={color.color} bg={color.bg} />
             </DropdownMenu.Item>
           ))}
-      </DropdownMenu.Content>
+        </DropdownMenu.Content>
       </DropdownMenu.Root>
 
       {error && (
@@ -95,5 +95,5 @@ export function ColorsDropdownInput({
         </div>
       )}
     </div>
-  );
+  )
 }

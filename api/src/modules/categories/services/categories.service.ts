@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { CategoriesRepository } from 'src/shared/database/repositories/categories.repository';
+import { Injectable } from '@nestjs/common'
+import { CategoriesRepository } from 'src/shared/database/repositories/categories.repository'
 
 @Injectable()
 export class CategoriesService {
@@ -8,6 +8,6 @@ export class CategoriesService {
   findAllByUserId(userId: string) {
     return this.categoriesRepo.findMany({
       where: { userId },
-    });
+    })
   }
 }

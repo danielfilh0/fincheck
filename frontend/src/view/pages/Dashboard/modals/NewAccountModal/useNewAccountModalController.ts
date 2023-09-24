@@ -1,11 +1,11 @@
-import { z } from "zod";
-import { useDashboard } from "../../components/DashboardContext/useDashboard";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { bankAccountsService } from "../../../../../app/services/bankAccounts";
-import toast from "react-hot-toast";
-import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
+import { z } from 'zod'
+import { useDashboard } from '../../components/DashboardContext/useDashboard'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { bankAccountsService } from '../../../../../app/services/bankAccounts'
+import toast from 'react-hot-toast'
+import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber'
 
 const schema = z.object({
   initialBalance: z.string().nonempty('Saldo inicial é obrigatório'),
@@ -31,9 +31,9 @@ export function useNewAccountModalController() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-       initialBalance: '0'
+      initialBalance: '0'
     }
-  });
+  })
 
   const queryClient = useQueryClient()
   const { isLoading, mutateAsync } = useMutation(bankAccountsService.create)

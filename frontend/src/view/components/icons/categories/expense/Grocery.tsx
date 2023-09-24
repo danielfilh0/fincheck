@@ -10,5 +10,5 @@ export function Grocery() {
       <path d="M26.0203 31.0003V27.0473C26.0203 25.9449 25.1262 25.0508 24.0238 25.0508C22.9215 25.0508 22.0273 25.9449 22.0273 27.0473V31.0003" stroke="#5C7CFA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import { Controller } from "react-hook-form";
-import { Button } from "../../../../components/Button";
-import { DatePickerInput } from "../../../../components/DatePickerInput";
-import { Input } from "../../../../components/Input";
-import { InputCurrency } from "../../../../components/InputCurrency";
-import { Modal } from "../../../../components/Modal";
-import { Select } from "../../../../components/Select";
-import { useEditTransactionModalController } from "./useEditTransactionModalController";
-import { Transaction } from "../../../../../app/entities/Transaction";
-import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal";
-import { TrashIcon } from "../../../../components/icons/TrashIcon";
+import { Controller } from 'react-hook-form'
+import { Button } from '../../../../components/Button'
+import { DatePickerInput } from '../../../../components/DatePickerInput'
+import { Input } from '../../../../components/Input'
+import { InputCurrency } from '../../../../components/InputCurrency'
+import { Modal } from '../../../../components/Modal'
+import { Select } from '../../../../components/Select'
+import { useEditTransactionModalController } from './useEditTransactionModalController'
+import { Transaction } from '../../../../../app/entities/Transaction'
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal'
+import { TrashIcon } from '../../../../components/icons/TrashIcon'
 
 interface EditTransactionModalProps {
   open: boolean
@@ -30,9 +30,9 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
     handleDeleteTransaction,
     handleOpenDeleteModal,
     handleCloseDeleteModal
-  } = useEditTransactionModalController(transaction, onClose);
+  } = useEditTransactionModalController(transaction, onClose)
 
-  const isExpense = transaction?.type === "EXPENSE";
+  const isExpense = transaction?.type === 'EXPENSE'
 
   if (isDeleteModalOpen)
     return (
@@ -42,11 +42,11 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteTransaction}
       />
-  );
+    )
 
   return (
     <Modal
-      title={isExpense ? "Editar Despesa" : "Editar Receita"}
+      title={isExpense ? 'Editar Despesa' : 'Editar Receita'}
       open={open}
       onClose={onClose}
       rightAction={
@@ -58,7 +58,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
       <form onSubmit={handleSubmit}>
         <div>
           <span className="text-gray-600 tracking-[-0.5px] text-xs">
-            Valor da {isExpense ? "despesa" : "receita"}
+            Valor da {isExpense ? 'despesa' : 'receita'}
           </span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg">R$</span>
@@ -80,9 +80,9 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            placeholder={isExpense ? "Nome da Despesa" : "Nome da Receita"}
+            placeholder={isExpense ? 'Nome da Despesa' : 'Nome da Receita'}
             error={errors.name?.message}
-            {...register("name")}
+            {...register('name')}
           />
 
           <Controller
@@ -109,7 +109,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder={isExpense ? "Pagar com" : "Receber com"}
+                placeholder={isExpense ? 'Pagar com' : 'Receber com'}
                 onChange={onChange}
                 value={value}
                 error={errors.bankAccountId?.message}
@@ -137,5 +137,5 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
         </div>
       </form>
     </Modal>
-  );
+  )
 }

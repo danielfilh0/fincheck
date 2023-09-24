@@ -1,18 +1,18 @@
-import { FilterIcon } from "../../../../components/icons/FilterIcon";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { MONTHS } from "../../../../../app/config/constants";
-import { SliderOption } from "./SliderOption";
-import { SliderNavigation } from "./SliderNavigation";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
-import { useTransactionsController } from "./useTransactionsController";
-import { cn } from "../../../../../app/utils/cn";
-import { Spinner } from "../../../../components/Spinner";
-import emptyStateImage from "../../../../../assets/empty-state.svg";
-import { TransactionTypeDropdown } from "./TransactionTypeDropdown.tsx";
-import { FiltersModal } from "./FiltersModal/index.tsx";
-import { formatDate } from "../../../../../app/utils/formatDate.ts";
-import { EditTransactionModal } from "../../modals/EditTransactionModal/index.tsx";
+import { FilterIcon } from '../../../../components/icons/FilterIcon'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { MONTHS } from '../../../../../app/config/constants'
+import { SliderOption } from './SliderOption'
+import { SliderNavigation } from './SliderNavigation'
+import { formatCurrency } from '../../../../../app/utils/formatCurrency'
+import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon'
+import { useTransactionsController } from './useTransactionsController'
+import { cn } from '../../../../../app/utils/cn'
+import { Spinner } from '../../../../components/Spinner'
+import emptyStateImage from '../../../../../assets/empty-state.svg'
+import { TransactionTypeDropdown } from './TransactionTypeDropdown.tsx'
+import { FiltersModal } from './FiltersModal/index.tsx'
+import { formatDate } from '../../../../../app/utils/formatDate.ts'
+import { EditTransactionModal } from '../../modals/EditTransactionModal/index.tsx'
 
 export function Transactions() {
   const {
@@ -31,7 +31,7 @@ export function Transactions() {
     handleCloseEditModal,
     isEditModalOpen,
     transactionBeingEdited,
-  } = useTransactionsController();
+  } = useTransactionsController()
 
   if (isInitialLoading) {
     return (
@@ -40,7 +40,7 @@ export function Transactions() {
           <Spinner className="w-10 h-10" />
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -53,7 +53,7 @@ export function Transactions() {
       <header>
         <div className="flex justify-between items-center">
           <TransactionTypeDropdown
-            onSelect={handleChangeFilters("type")}
+            onSelect={handleChangeFilters('type')}
             selectedType={filters.type}
           />
 
@@ -68,7 +68,7 @@ export function Transactions() {
             centeredSlides
             initialSlide={filters.month}
             onSlideChange={(swiper) => {
-              handleChangeFilters("month")(swiper.realIndex);
+              handleChangeFilters('month')(swiper.realIndex)
             }}
           >
             <SliderNavigation />
@@ -135,14 +135,14 @@ export function Transactions() {
 
                 <span
                   className={cn(
-                    "tracking-[-0.5px] font-medium",
-                    transaction.type === "EXPENSE"
-                      ? "text-red-800"
-                      : "text-green-800",
-                    !areValuesVisible && "blur-md"
+                    'tracking-[-0.5px] font-medium',
+                    transaction.type === 'EXPENSE'
+                      ? 'text-red-800'
+                      : 'text-green-800',
+                    !areValuesVisible && 'blur-md'
                   )}
                 >
-                  {transaction.type === "EXPENSE" ? "- " : "+ "}
+                  {transaction.type === 'EXPENSE' ? '- ' : '+ '}
                   {formatCurrency(transaction.value)}
                 </span>
               </div>
@@ -151,5 +151,5 @@ export function Transactions() {
         )}
       </div>
     </div>
-  );
+  )
 }

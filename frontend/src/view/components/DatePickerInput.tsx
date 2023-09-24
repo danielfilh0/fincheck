@@ -1,9 +1,9 @@
-import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/cn";
-import { useState } from "react";
-import { formatDate } from "../../app/utils/formatDate";
-import { Popover } from "./Popover";
-import { DatePicker } from "./DatePicker";
+import { CrossCircledIcon } from '@radix-ui/react-icons'
+import { cn } from '../../app/utils/cn'
+import { useState } from 'react'
+import { formatDate } from '../../app/utils/formatDate'
+import { Popover } from './Popover'
+import { DatePicker } from './DatePicker'
 
 interface DatePickerInputProps {
   error?: string;
@@ -18,11 +18,11 @@ export function DatePickerInput({
   value,
   onChange,
 }: DatePickerInputProps) {
-  const [selectedDate, setSelectedDate] = useState(value ?? new Date());
+  const [selectedDate, setSelectedDate] = useState(value ?? new Date())
 
   function handleChangeDate(date: Date) {
-    setSelectedDate(date);
-    onChange?.(date);
+    setSelectedDate(date)
+    onChange?.(date)
   }
 
   return (
@@ -32,8 +32,8 @@ export function DatePickerInput({
           <button
             type="button"
             className={cn(
-              "bg-white rounded-lg w-full border pt-4 border-gray-500 px-3 h-[52px] text-gray-700 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative",
-              error && "!border-red-900",
+              'bg-white rounded-lg w-full border pt-4 border-gray-500 px-3 h-[52px] text-gray-700 placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none text-left relative',
+              error && '!border-red-900',
               className
             )}
           >
@@ -59,5 +59,5 @@ export function DatePickerInput({
         )}
       </Popover.Root>
     </div>
-  );
+  )
 }

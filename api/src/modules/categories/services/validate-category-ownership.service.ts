@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CategoriesRepository } from 'src/shared/database/repositories/categories.repository';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { CategoriesRepository } from 'src/shared/database/repositories/categories.repository'
 
 @Injectable()
 export class ValidateCategoryOwnershipService {
@@ -8,8 +8,8 @@ export class ValidateCategoryOwnershipService {
   async validate(userId: string, categoryId: string) {
     const isOwner = await this.categoriesRepo.findFirst({
       where: { userId, id: categoryId },
-    });
+    })
 
-    if (!isOwner) throw new NotFoundException('Category not found.');
+    if (!isOwner) throw new NotFoundException('Category not found.')
   }
 }

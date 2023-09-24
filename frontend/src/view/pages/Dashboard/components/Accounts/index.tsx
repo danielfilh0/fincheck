@@ -1,15 +1,15 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { EyeIcon } from "../../../../components/icons/EyeIcon";
-import { AccountCard } from "./AccountCard";
-import { SliderNavigation } from './SliderNavigation';
-import { useAccountsController } from './useAccountsController';
-import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
-import { formatCurrency } from '../../../../../app/utils/formatCurrency';
-import { cn } from '../../../../../app/utils/cn';
-import { Spinner } from '../../../../components/Spinner';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { EyeIcon } from '../../../../components/icons/EyeIcon'
+import { AccountCard } from './AccountCard'
+import { SliderNavigation } from './SliderNavigation'
+import { useAccountsController } from './useAccountsController'
+import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth'
+import { formatCurrency } from '../../../../../app/utils/formatCurrency'
+import { cn } from '../../../../../app/utils/cn'
+import { Spinner } from '../../../../components/Spinner'
+import { PlusIcon } from '@radix-ui/react-icons'
 
 export function Accounts() {
   const {
@@ -103,11 +103,11 @@ export function Accounts() {
                 />
               </div>
 
-            {accounts.map(account => (
-              <SwiperSlide key={account.id}>
-                <AccountCard data={account} />
-              </SwiperSlide>
-            ))}
+              {accounts.map(account => (
+                <SwiperSlide key={account.id}>
+                  <AccountCard data={account} />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         )}

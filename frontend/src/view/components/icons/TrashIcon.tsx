@@ -18,5 +18,5 @@ export function TrashIcon({ className }: TrashIconProps) {
         strokeLinejoin="round"
       />
     </svg>
-  );
+  )
 }

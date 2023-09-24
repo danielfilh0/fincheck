@@ -9,5 +9,5 @@ export function Travel() {
       <path d="M17.7109 16.3213V23.1965M17.7109 30.5465V26.2537" stroke="#FF922B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  );
+  )
 }

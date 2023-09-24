@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { categoriesService } from "../services/categoriesService";
+import { categoriesService } from '../services/categoriesService'
 
 export function useCategories() {
   const { data, isFetching } = useQuery({
