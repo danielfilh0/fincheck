@@ -14,14 +14,20 @@ export function InputCurrency({
   error, value, onChange, className, defaultValue
 }: InputCurrencyProps) {
 
+  function handleTransform(value: string) {
+    return value.length === 0 ? '0' : value
+  }
+
   return (
     <div>
       <CurrencyInput
         groupSeparator="."
         decimalSeparator=","
+        decimalScale={2}
         value={value}
         defaultValue={defaultValue}
-        onValueChange={(event) => onChange(event)}
+        onValueChange={(value) => onChange(value)}
+        transformRawValue={handleTransform}
         className={cn(
           'w-full text-gray-800 text-[32px] font-bold tracking-[-1px] outline-none',
           error && 'text-red-900',
