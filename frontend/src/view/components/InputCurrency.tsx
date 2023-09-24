@@ -19,7 +19,9 @@ export function InputCurrency({
   }
 
   return (
-    <div>
+    <div className={cn(
+      error && 'relative top-4'
+    )}>
       <CurrencyInput
         groupSeparator="."
         decimalSeparator=","
