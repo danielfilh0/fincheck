@@ -13,4 +13,8 @@ export class UsersRepository {
   create(createDto: Prisma.UserCreateArgs) {
     return this.prismaService.user.create(createDto)
   }
+
+  update(updateDto: Prisma.UserUpdateArgs) {
+    return this.prismaService.user.update(updateDto)
+  }
 }

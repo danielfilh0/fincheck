@@ -3,11 +3,17 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { compare, hash } from 'bcryptjs'
+
 import { UsersRepository } from 'src/shared/database/repositories/users.repository'
 import { SigninDto } from './dto/signin-dto'
-import { compare, hash } from 'bcryptjs'
-import { JwtService } from '@nestjs/jwt'
 import { SignupDto } from './dto/signup-dto'
+import { ForgetPasswordDto } from './dto/forget-password-dto'
+import { ResetPasswordDto } from './dto/reset-password-dto'
+import { resend } from 'src/shared/libs/resend'
+import { env } from 'src/shared/config/env'
+import { generateRecoverPasswordTemplateHtml } from 'src/shared/libs/resend/generate-template-html'
 
 @Injectable()
 export class AuthService {
@@ -83,7 +89,48 @@ export class AuthService {
     return { acessToken }
   }
 
+  async forgetPassword(forgetPasswordDto: ForgetPasswordDto) {
+    const { email } = forgetPasswordDto
+
+    const user = await this.usersRepo.findUnique({
+      where: { email },
+    })
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid email.')
+    }
+
+    const resetToken = await this.generateResetPasswordToken(user.id)
+
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: email,
+      subject: 'Recuperação de senha - Fincheck',
+      html: generateRecoverPasswordTemplateHtml({
+        email,
+        token: resetToken
+      })
+    })
+  }
+
+  async resetPassword(userId: string, resetPasswordDto: ResetPasswordDto) {
+    const { newPassword } = resetPasswordDto
+
+    const hashedNewPassword = await hash(newPassword, 12)
+
+    await this.usersRepo.update({
+      where: { id: userId },
+      data: { password: hashedNewPassword }
+    })
+  }
+
   private generateAcessToken(userId: string) {
     return this.jwtService.signAsync({ sub: userId })
+  }
+
+  private generateResetPasswordToken(userId: string) {
+    return this.jwtService.signAsync(
+      { sub: userId },
+      { secret: env.resetPasswordJwtSecret, expiresIn: 300 })
   }
 }

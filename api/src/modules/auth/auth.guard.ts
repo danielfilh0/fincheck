@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Request } from 'express'
 import { env } from 'src/shared/config/env'
 import { IS_PUBLIC_KEY } from 'src/shared/decorators/IsPublic'
+import { IS_RESET_PASSWORD } from 'src/shared/decorators/IsResetPassword'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,6 +17,11 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getClass(),
+      context.getHandler(),
+    ])
+
+    const isResetPassword = this.reflector.getAllAndOverride<boolean>(IS_RESET_PASSWORD, [
       context.getClass(),
       context.getHandler(),
     ])
@@ -32,7 +38,7 @@ export class AuthGuard implements CanActivate {
 
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: env.jwtSecret,
+        secret: isResetPassword ? env.resetPasswordJwtSecret : env.jwtSecret,
       })
 
       request['userId'] = payload.sub
