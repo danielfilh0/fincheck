@@ -41,6 +41,8 @@ export function Login() {
           Entrar
         </Button>
       </form>
+
+      <Link to="/forget-password" className="tracking-[-1px] text-teal-900 font-medium mt-2 mx-auto w-[max-content] block">Esqueci minha senha</Link>
     </>
   )
 }
