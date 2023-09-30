@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { localStorageKeys } from '../config/localStorageKeys'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { usersService } from '../services/usersService'
 import { toast } from 'react-hot-toast'
 import { LaunchScreen } from '../../view/components/LaunchScreen'
@@ -29,6 +29,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     staleTime: Infinity
   })
 
+  const queryClient = useQueryClient()
+
   const signin = useCallback((acessToken: string) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, acessToken)
 
@@ -38,6 +40,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signout = useCallback(() => {
     localStorage.removeItem(localStorageKeys.ACCESS_TOKEN)
     remove()
+
+    queryClient.clear()
 
     setSignedIn(false)
   }, [remove])
