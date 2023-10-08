@@ -8,7 +8,7 @@
 ![Logo](frontend/src/assets/background.png)
 
 # Funcionalidades
-- Cadastro e autenticação de usuários
+- Cadastro, autenticação e recuperação de senha de usuários
 - Listagem, cadastro, atualização e remoção de contas bancárias
 - Listagem, cadastro, atualização e remoção de transações (receitas e despesas)
 
@@ -29,7 +29,6 @@
 - PostgreSQL
 - API REST
 
-
 # Como executar
 Antes de tudo, na sua máquina deverá ter:
 - Node.js
@@ -47,6 +46,10 @@ $ cd fincheck/api
 $ docker compose up -d
 ```
 Aqui será preciso criar um arquivo `.env` seguindo o exemplo do arquivo `.env.example`.
+
+Para o envio de emails, o sistema utiliza o serviço do `Gmail`. Será preciso criar uma conta `Google`, habilitar a autenticação
+de dois fatores e criar uma senha de aplicativo neste <a href="https://myaccount.google.com/apppasswords">link</a>. Após isso,
+no arquivo `.env` atribua às variáveis `EMAIL_USER` e `EMAIL_PASSWORD` o email e senha de aplicativo criados.
 
 ```bash
 $ npx prisma migrate dev
