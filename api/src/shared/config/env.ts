@@ -18,7 +18,11 @@ class Env {
 
   @IsString()
   @IsNotEmpty()
-    resendApiKey: string
+    emailUser: string
+
+  @IsString()
+  @IsNotEmpty()
+    emailPassword: string
 
   @IsString()
   @IsNotEmpty()
@@ -29,7 +33,8 @@ export const env: Env = plainToInstance(Env, {
   jwtSecret: process.env.JWT_SECRET,
   resetPasswordJwtSecret: process.env.RESET_PASSWORD_JWT_SECRET,
   dbURL: process.env.DATABASE_URL,
-  resendApiKey: process.env.RESEND_API_KEY,
+  emailUser: process.env.EMAIL_USER,
+  emailPassword: process.env.EMAIL_PASSWORD,
   frontendUrl: process.env.FRONTEND_URL
 })
 

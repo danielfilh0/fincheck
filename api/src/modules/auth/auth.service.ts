@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  ServiceUnavailableException,
   UnauthorizedException,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
@@ -11,14 +12,14 @@ import { SigninDto } from './dto/signin-dto'
 import { SignupDto } from './dto/signup-dto'
 import { ForgetPasswordDto } from './dto/forget-password-dto'
 import { ResetPasswordDto } from './dto/reset-password-dto'
-import { resend } from 'src/shared/libs/resend'
 import { env } from 'src/shared/config/env'
-import { generateRecoverPasswordTemplateHtml } from 'src/shared/libs/resend/generate-template-html'
+import { MailService } from '../mail/mail.service'
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersRepo: UsersRepository,
+    private mailService: MailService,
     private jwtService: JwtService,
   ) {}
 
@@ -102,15 +103,16 @@ export class AuthService {
 
     const resetToken = await this.generateResetPasswordToken(user.id)
 
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: email,
-      subject: 'Recuperação de senha - Fincheck',
-      html: generateRecoverPasswordTemplateHtml({
-        email,
-        token: resetToken
-      })
-    })
+    try {
+      await this.mailService.send({
+        to: email,
+        subject: 'Recuperação de senha - Fincheck',
+        msg: resetToken,
+        isRecoverPass: true
+      },)
+    } catch {
+      throw new ServiceUnavailableException('Error during email send.')
+    }
   }
 
   async resetPassword(userId: string, resetPasswordDto: ResetPasswordDto) {
